@@ -1,9 +1,12 @@
 
+import Trivia from "./Models/Trivia.js"
 import { EventEmitter } from "./Utils/EventEmitter.js"
 import { isValidProp } from "./Utils/isValidProp.js"
 
 class AppState extends EventEmitter {
   next = ''
+  /** @type {Trivia[]} */
+  trivia = []
   correct = 0
   totalQuest = 0
 

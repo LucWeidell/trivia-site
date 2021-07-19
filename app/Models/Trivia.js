@@ -1,16 +1,46 @@
-class Trivia
-{
+export default class Trivia{
 
-  constructor({correct_answer, incorrect_answers, type }){
+  constructor({question, correct_answer, incorrect_answers, type }){
+  this.question = question
   this.correct = correct_answer
   this.answers = ["True", "False"]
 
   //Correct if not true or false
   if(type == 'multiple') {
     this.answers = incorrect_answers
-    let randIndex = MAth.floor(Math.random()*3)
+    let randIndex = Math.floor(Math.random()*3)
     this.answers.splice(randIndex, 0, this.correct)
   }
+  }
+
+  getCorrect() {
+    return this.correct
+  }
+
+
+  getTemplate() {
+    return /*HTML*/ `
+    <div class="row text-center justify-content-center">
+      <div class="col-md-12" id ="question">
+          <p>'${this.question}'</p>
+      </div>
+      <div class="col-md-12" id = "buttons">
+          '${this.getTemplateButton()}'
+      </div>
+    </div>
+    `
+  }
+
+
+  getTemplateButton() {
+    let template = ''
+    this.answers.forEach(a => {
+      template +=  `
+      <button type="button" class="btn btn-primary"
+      onclick = "app.triviasController.isCorrect('${a}')">${a}</button>
+      `
+    })
+    return template;
   }
 
 
